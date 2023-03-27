@@ -21,6 +21,7 @@ const upload = multer({ storage: storage });
 
 // Create a new item
 router.post("/", upload.single("image"), async (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
   const { title, tag, link } = req.body;
   const item = new Item({
     title,
@@ -42,6 +43,7 @@ router.post("/", upload.single("image"), async (req, res) => {
 
 // Get all items
 router.get("/", async (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
   try {
     const items = await Item.find();
     res.json(items);
